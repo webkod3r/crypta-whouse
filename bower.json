@@ -1,15 +1,15 @@
 {
-  "name": "angular-seed",
-  "description": "A starter project for AngularJS",
+  "name": "crypta-whouse",
+  "description": "Private vault to store credentials",
   "version": "0.0.0",
-  "homepage": "https://github.com/angular/angular-seed",
+  "homepage": "https://github.com/webkod3r/crypta-whouse",
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "angular": "~1.5.0",
-    "angular-route": "~1.5.0",
-    "angular-loader": "~1.5.0",
-    "angular-mocks": "~1.5.0",
+    "angular": "~1.6.x",
+    "angular-route": "~1.6.x",
+    "angular-loader": "~1.6.x",
+    "angular-mocks": "~1.6.x",
     "html5-boilerplate": "^5.3.0"
   }
 }

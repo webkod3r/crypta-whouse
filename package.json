@@ -1,9 +1,9 @@
 {
-  "name": "angular-seed",
+  "name": "crypta-whouse",
   "private": true,
   "version": "0.0.0",
-  "description": "A starter project for AngularJS",
-  "repository": "https://github.com/angular/angular-seed",
+  "description": "Private vault to store credentials",
+  "repository": "https://github.com/webkod3r/crypta-whouse",
   "license": "MIT",
   "devDependencies": {
     "bower": "^1.7.7",
