@@ -6,19 +6,15 @@
       <a href="#" class="list-group-item">Favourites</a>
     </div>
 
-    <div class="panel panel-default">
+    <div class="panel panel-default" ng-controller="CategoriesCtrl">
       <!-- Default panel contents -->
       <div class="panel-heading">Categories</div>
 
       <!-- List group -->
       <div class="list-group">
-        <a href="#" class="list-group-item active">
-          <span class="badge">14</span>
-          Logins
-        </a>
-        <a href="#" class="list-group-item">
-          <span class="badge">1</span>
-          Notes
+        <a class="list-group-item" ng-repeat="category in categories" id="category-{{category.id}}" ng-click="viewCategoryItems(category.id)">
+          <span class="badge">{{category.secrets.length}}</span>
+          {{category.name}}
         </a>
       </div>
     </div>

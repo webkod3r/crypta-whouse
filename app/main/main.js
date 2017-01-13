@@ -1,6 +1,6 @@
 'use strict';
 
-var mainModule = angular.module('cryptaApp.main', ['ngRoute']);
+var mainModule = angular.module('cryptaApp.main', ['ngRoute', 'cryptaApp.core.category']);
 
 mainModule.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/main', {
@@ -9,6 +9,22 @@ mainModule.config(['$routeProvider', function($routeProvider) {
   });
 }]);
 
-mainModule.controller('MainCtrl', [function() {
+mainModule.controller('MainCtrl', ['appConfig', '$scope', function(appConfig, $scope) {
+  console.log(appConfig);
+}]);
 
+// Show the categories in the list
+mainModule.controller('CategoriesCtrl', ['$scope', 'Category', 'CategorySecrets', function ($scope, Category, CategorySecrets) {
+  //fetch all categories. Issues a GET to /api/categories
+  $scope.categories = Category.query(function (data) {
+    for(var i=0; i < data.length; i++){
+      var secrets = CategorySecrets.query({catId: data[i].id});
+      data[i].secrets = secrets;
+    }
+  });
+
+  $scope.viewCategoryItems = function (categoryId) {
+    $scope.categoryItems = '';
+    console.log(categoryId);
+  }
 }]);
