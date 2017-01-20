@@ -14,5 +14,5 @@ categoryModule.factory('Category', ['$resource', 'appConfig', function ($resourc
 }]);
 
 categoryModule.factory('CategorySecrets', ['$resource', 'appConfig', function ($resource, appConfig) {
-  return $resource(appConfig.baseUrl + '/categories/:catId/secret_items', {catId: '@id'}, {});
+  return $resource(appConfig.baseUrl + '/categories/:catId/secrets', {catId: '@id'}, {});
 }]);

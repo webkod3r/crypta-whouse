@@ -6,5 +6,6 @@ var app = angular.module('cryptaApp', [
   'ngResource',
   'cryptaApp.core',
   'cryptaApp.main',
-  'cryptaApp.version'
+  'cryptaApp.version',
+  'cryptaApp.secrets'
 ]);
