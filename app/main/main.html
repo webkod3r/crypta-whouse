@@ -45,5 +45,7 @@
     <!--/.column-wrap-secret-items-->
   </div>
 
-  <div class="col-md-6">df</div>
+  <div class="col-md-6" ng-controller="SecretFormCtrl">
+    <secret-form ng-show="SecretService.current != null"></secret-form>
+  </div>
 </div>
