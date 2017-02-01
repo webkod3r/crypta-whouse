@@ -14,7 +14,7 @@ mainModule.controller('MainCtrl', ['appConfig', '$scope', function(appConfig, $s
 }]);
 
 // Show the categories in the list
-mainModule.controller('CategoriesCtrl', ['$scope', 'Category', 'CategorySecrets', function ($scope, Category, CategorySecrets) {
+mainModule.controller('CategoriesCtrl', ['$scope', 'Category', 'CategorySecrets', 'SecretService', function ($scope, Category, CategorySecrets, SecretService) {
   //fetch all categories. Issues a GET to /api/categories
   $scope.categories = Category.query(function (data) {
     for(var i=0; i < data.length; i++){
@@ -23,8 +23,7 @@ mainModule.controller('CategoriesCtrl', ['$scope', 'Category', 'CategorySecrets'
     }
   });
 
-  $scope.viewCategoryItems = function (categoryId) {
-    $scope.categoryItems = '';
-    console.log(categoryId);
-  }
+  $scope.loadSecrets = function (categoryId) {
+    SecretService.loadSecrets(categoryId);
+  };
 }]);

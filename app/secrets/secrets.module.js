@@ -4,18 +4,29 @@ var secretsModule= angular.module('cryptaApp.secrets', [
   'ngResource'
 ]);
 
-secretsModule.controller('SecretsListCtrl', ['$rootScope', 'Secrets', 'SecretService', function($rootScope, Secrets, SecretService){
+//
+// handler module for secretList component
+//
+secretsModule.controller('SecretsListCtrl', ['$rootScope', '$scope', 'Secrets', 'SecretService', function($rootScope, $scope, Secrets, SecretService){
   var self = this;
-  var secrets = Secrets.query();
-  secrets.$promise.then(function (response) {
-    self.secrets = response;
-  });
-  this.order = 'created';
+  self.secrets = SecretService.secrets();
 
+  // watch for changes in SecretService
+  $scope.$watch(
+    function () {
+      return SecretService.secrets();
+    },
+    function (newVal, oldVal, scope) {
+      console.log('change on secrets', arguments);
+      self.secrets = newVal;
+    }
+  );
+
+  // get info from secret
   this.loadSecret = function (secretID) {
     self.selected = secretID;
     self.currentSecret = Secrets.get({id: secretID}).$promise.then(function (data) {
-      SecretService.current = data;
+      SecretService.current(data);
     });
     SecretService.showForm = true;
     $rootScope.SecretService = SecretService;
@@ -29,7 +40,7 @@ secretsModule.controller('SecretFormCtrl', ['$scope', 'Secrets', 'SecretService'
   // watch for changes in SecretService
   $scope.$watch(
     function () {
-      return SecretService.current;
+      return SecretService.current();
     },
     function (newVal, oldVal, scope) {
       // newVal have the current Secret
@@ -41,6 +52,6 @@ secretsModule.controller('SecretFormCtrl', ['$scope', 'Secrets', 'SecretService'
   );
 
   this.submitSecret = function () {
-    console.log(SecretService.current);
+    console.log(SecretService.current());
   };
 }]);

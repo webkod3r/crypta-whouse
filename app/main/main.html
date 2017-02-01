@@ -1,18 +1,22 @@
 <div class="row">
 
-  <div class="col-md-3">
+  <div class="col-md-3" ng-controller="CategoriesCtrl">
     <div class="list-group">
-      <a href="#" class="list-group-item active">All items</a>
-      <a href="#" class="list-group-item">Favourites</a>
+      <a class="list-group-item active" ng-click="loadSecrets()">All items</a>
+      <a class="list-group-item">Favourites</a>
     </div>
 
-    <div class="panel panel-default" ng-controller="CategoriesCtrl">
+    <div class="panel panel-default">
       <!-- Default panel contents -->
       <div class="panel-heading">Categories</div>
 
       <!-- List group -->
       <div class="list-group">
-        <a class="list-group-item" ng-repeat="category in categories" id="category-{{category.id}}" ng-click="viewCategoryItems(category.id)">
+        <a ng-cloak
+          class="list-group-item"
+          ng-repeat="category in categories"
+          id="category-{{category.id}}"
+          ng-click="loadSecrets(category.id)">
           <span class="badge">{{category.secrets.length}}</span>
           {{category.name}}
         </a>
