@@ -16,3 +16,8 @@ categoryModule.factory('Category', ['$resource', 'appConfig', function ($resourc
 categoryModule.factory('CategorySecrets', ['$resource', 'appConfig', function ($resource, appConfig) {
   return $resource(appConfig.baseUrl + '/categories/:catId/secrets', {catId: '@id'}, {});
 }]);
+
+// CategoryService
+categoryModule.service('CategoryService', [function () {
+
+}]);

@@ -5,11 +5,11 @@ var mainModule = angular.module('cryptaApp.main', ['ngRoute', 'cryptaApp.core.ca
 mainModule.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/main', {
     templateUrl: 'main/main.html',
-    controller: 'MainCtrl'
+    controller: 'MainController'
   });
 }]);
 
-mainModule.controller('MainCtrl', ['appConfig', '$scope', function(appConfig, $scope) {
+mainModule.controller('MainController', ['appConfig', '$scope', function(appConfig, $scope) {
   console.log(appConfig);
 }]);
 
@@ -18,10 +18,21 @@ mainModule.controller('CategoriesCtrl', ['$scope', 'Category', 'CategorySecrets'
   //fetch all categories. Issues a GET to /api/categories
   $scope.categories = Category.query(function (data) {
     for(var i=0; i < data.length; i++){
-      var secrets = CategorySecrets.query({catId: data[i].id});
+      var secrets;
+      secrets = CategorySecrets.query({catId: data[i].id});
       data[i].secrets = secrets;
     }
   });
+
+  // Watch for change in current category selected
+  $scope.$watch(
+    function () {
+      return SecretService.category();
+    },
+    function (newVal, oldVal, scope) {
+      $scope.currentCategory = newVal;
+    }
+  );
 
   $scope.loadSecrets = function (categoryId) {
     SecretService.loadSecrets(categoryId);

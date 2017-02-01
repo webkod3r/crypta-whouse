@@ -14,9 +14,11 @@ secretsModule.factory('SecretsCategory', ['$resource', 'appConfig', function ($r
   });
 }]);
 
+// SecretService to share information among controlles
 secretsModule.service('SecretService', ['Secrets', 'SecretsCategory', function (Secrets, SecretsCategory) {
   var self = this;
   var currentSecret = null;
+  var currentCategory = null;
   var secrets = [];
 
   this.secrets = function () {
@@ -45,8 +47,10 @@ secretsModule.service('SecretService', ['Secrets', 'SecretsCategory', function (
   this.loadSecrets = function (category) {
     var query = null;
     if (isNaN(category)) {
+      currentCategory = -1;
       query = Secrets.query();
     } else {
+      currentCategory = category;
       query = SecretsCategory.query({catId: category});
     }
 
@@ -61,6 +65,19 @@ secretsModule.service('SecretService', ['Secrets', 'SecretsCategory', function (
     if (value != null) {
       currentSecret = value;
     }
-    return this.currentSecret;
-  }
+    return currentSecret;
+  };
+
+  /**
+   * Get/Set current category
+   *
+   * @param {Number|null} value
+   * @returns {Number|null}
+   */
+  this.category = function (value) {
+    if (value != null) {
+      currentCategory = value;
+    }
+    return currentCategory;
+  };
 }]);
